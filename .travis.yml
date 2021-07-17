@@ -5,20 +5,20 @@ services:
   - docker
 
 before_install:
-  - docker build -t learn/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t ml2018ds/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true learn/react-test npm test
+  - docker run -e CI=true ml2018ds/react-test npm test
 
 after_success:
-  - docker build -t learn/multi-client ./client
-  - docker build -t learn/multi-nginx ./nginx
-  - docker build -t learn/multi-server ./server
-  - docker build -t learn/multi-worker ./worker
+  - docker build -t ml2018ds/multi-client ./client
+  - docker build -t ml2018ds/multi-nginx ./nginx
+  - docker build -t ml2018ds/multi-server ./server
+  - docker build -t ml2018ds/multi-worker ./worker
   # Log in to the docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push learn/multi-client
-  - docker push learn/multi-nginx
-  - docker push learn/multi-server
-  - docker push learn/multi-worker
+  - docker push ml2018ds/multi-client
+  - docker push ml2018ds/multi-nginx
+  - docker push ml2018ds/multi-server
+  - docker push ml2018ds/multi-worker
